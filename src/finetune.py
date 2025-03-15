@@ -26,7 +26,7 @@ def train(config):
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
 
 
-    training_arguments = SFTConfig(**training_args_dict)
+    training_arguments = TrainingArguments(**training_args_dict)
     
     print("type of training_Arg: ", type(training_args_dict))
     print("type of trainer_config: ", type(trainer_config_dict))
