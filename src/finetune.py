@@ -15,21 +15,12 @@ from src.utils import convert_list_config_to_list
 
 def train(config):
 
-    training_args_dict = OmegaConf.to_container(config["training_arg"], resolve=True)
-    trainer_config_dict = OmegaConf.to_container(config["trainer"], resolve=True)
-
-    # Ensure all nested OmegaConf objects are resolved
-    for key, value in training_args_dict.items():
-        if isinstance(value, (DictConfig, ListConfig)):
-            training_args_dict[key] = OmegaConf.to_container(value, resolve=True)
-    for key, value in trainer_config_dict.items():
-        if isinstance(value, (DictConfig, ListConfig)):
-            trainer_config_dict[key] = OmegaConf.to_container(value, resolve=True)
+    training_args_dict = convert_list_config_to_list(config["training_arg"])
+    trainer_config_dict = convert_list_config_to_list(config["trainer"])
 
     model, tokenizer, peft_config = LLM.load_model(config)
     
-    if isinstance(peft_config, (DictConfig, dict)):
-        peft_config = OmegaConf.to_container(peft_config, resolve=True) if isinstance(peft_config, DictConfig) else peft_config
+    peft_config = convert_list_config_to_list(peft_config)
 
     llm_dataset = LLM_Dataset(config, tokenizer)
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
