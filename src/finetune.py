@@ -44,7 +44,7 @@ def train(config):
     trainer.save_model(os.path.join(config["training_args"]['output_dir'], "best"))
     
     if config.get("log", "log") == "wandb":
-        wandb.init(project=config[""]["project_name"])
+        wandb.finish()
 
 @hydra.main(version_base=None, config_path="../config", config_name="finetune.yaml")
 def main(config : DictConfig) -> None:
