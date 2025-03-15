@@ -6,7 +6,7 @@ defaults:
 - trainer: trainer
 - lora: lora
 - qlora: qlora
-# - log: "log hear"
+- log: wandb
 
 task_name: "Finetune"
 

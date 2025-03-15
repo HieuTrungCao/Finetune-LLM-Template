@@ -1,6 +1,7 @@
 import os
 import hydra
 import rootutils
+import wandb
 
 from omegaconf import DictConfig
 from transformers import TrainingArguments
@@ -13,6 +14,9 @@ from src.utils import convert_list_config_to_list
 
 def train(config):
 
+    if config.get("log", "log") == "wandb":
+        wandb.init(project=config[""]["project_name"])
+    
     config = convert_list_config_to_list(config)
 
     model, tokenizer, peft_config = LLM.load_model(config)
@@ -39,6 +43,9 @@ def train(config):
     
     trainer.save_model(os.path.join(config["training_args"]['output_dir'], "best"))
     
+    if config.get("log", "log") == "wandb":
+        wandb.init(project=config[""]["project_name"])
+
 @hydra.main(version_base=None, config_path="../config", config_name="finetune.yaml")
 def main(config : DictConfig) -> None:
     train(config)
