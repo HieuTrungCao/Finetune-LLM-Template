@@ -22,7 +22,7 @@ class LLM_Dataset:
     
     def format_chat_template(self, data):
             row_json = [
-                {"role": "system", "content": data[self.config["data"]["prompt_system"]]},
+                {"role": "system", "content": self.config["data"]["prompt_system"]},
                 {"role": "user", "content": data[self.config["data"]["instruction"]]},
                 {"role": "assistant", "content": data[self.config["data"]["response"]]}
             ]
