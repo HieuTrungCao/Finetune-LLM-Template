@@ -3,7 +3,7 @@ import wandb
 import hydra
 import rootutils
 
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import DictConfig, OmegaConf, ListConfig
 from transformers import TrainingArguments
 from trl import SFTTrainer, SFTConfig
 from huggingface_hub import login
@@ -17,6 +17,14 @@ def train(config):
 
     training_args_dict = OmegaConf.to_container(config["training_arg"], resolve=True)
     trainer_config_dict = OmegaConf.to_container(config["trainer"], resolve=True)
+
+    # Ensure all nested OmegaConf objects are resolved
+    for key, value in training_args_dict.items():
+        if isinstance(value, (DictConfig, ListConfig)):
+            training_args_dict[key] = OmegaConf.to_container(value, resolve=True)
+    for key, value in trainer_config_dict.items():
+        if isinstance(value, (DictConfig, ListConfig)):
+            trainer_config_dict[key] = OmegaConf.to_container(value, resolve=True)
 
     model, tokenizer, peft_config = LLM.load_model(config)
     
