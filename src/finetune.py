@@ -5,7 +5,7 @@ import rootutils
 
 from omegaconf import DictConfig
 from transformers import TrainingArguments
-from trl import SFTTrainer
+from trl import SFTTrainer, SFTConfig
 from huggingface_hub import login
 
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
@@ -20,7 +20,7 @@ def train(config):
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
 
 
-    training_arguments = TrainingArguments(**config["training_arg"])
+    training_arguments = SFTConfig(**config["training_arg"])
     
     trainer = SFTTrainer(
         model=model,
