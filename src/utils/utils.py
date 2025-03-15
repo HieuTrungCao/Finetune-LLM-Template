@@ -1,10 +1,9 @@
-from omegaconf import ListConfig
+from omegaconf import ListConfig, DictConfig
 
 def convert_list_config_to_list(obj):
-    if isinstance(obj, ListConfig):
-        return list(obj)
-    elif isinstance(obj, dict):
+    if isinstance(obj, dict) or isinstance(obj, DictConfig):
         return {k: convert_list_config_to_list(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
+    elif isinstance(obj, list) or isinstance(obj, ListConfig):
         return [convert_list_config_to_list(elem) for elem in obj]
+    
     return obj

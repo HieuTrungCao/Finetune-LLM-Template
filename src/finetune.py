@@ -3,9 +3,9 @@ import wandb
 import hydra
 import rootutils
 
-from omegaconf import DictConfig, OmegaConf, ListConfig
+from omegaconf import DictConfig
 from transformers import TrainingArguments
-from trl import SFTTrainer, SFTConfig
+from trl import SFTTrainer
 from huggingface_hub import login
 
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
@@ -15,8 +15,7 @@ from src.utils import convert_list_config_to_list
 
 def train(config):
 
-    training_args_dict = convert_list_config_to_list(config["training_arg"])
-    trainer_config_dict = convert_list_config_to_list(config["trainer"])
+    config = convert_list_config_to_list(config)
 
     model, tokenizer, peft_config = LLM.load_model(config)
     
@@ -26,12 +25,8 @@ def train(config):
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
 
 
-    training_arguments = TrainingArguments(**training_args_dict)
+    training_arguments = TrainingArguments(**config["training_arg"])
     
-    print("type of training_Arg: ", type(training_args_dict))
-    print("type of trainer_config: ", type(trainer_config_dict))
-    print("Peft config: ", type(peft_config))
-    print("Stf config: ", type(training_arguments))
     trainer = SFTTrainer(
         model=model,
         train_dataset=finetune_dataset,
@@ -39,7 +34,7 @@ def train(config):
         peft_config=peft_config,
         tokenizer=tokenizer,
         args=training_arguments,
-        **trainer_config_dict
+        **config["trainer"]
     )
 
     trainer.train()
