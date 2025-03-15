@@ -20,6 +20,9 @@ def train(config):
 
     model, tokenizer, peft_config = LLM.load_model(config)
     
+    if isinstance(peft_config, (DictConfig, dict)):
+        peft_config = OmegaConf.to_container(peft_config, resolve=True) if isinstance(peft_config, DictConfig) else peft_config
+
     llm_dataset = LLM_Dataset(config, tokenizer)
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
 
