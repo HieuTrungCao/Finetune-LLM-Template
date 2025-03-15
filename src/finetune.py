@@ -13,10 +13,6 @@ from src.model import LLM
 from src.data import LLM_Dataset
 
 def train(config):
-    hf_token = "HUGGINGFACE_KEY"
-    wb_token = "WANDB_KEY"
-
-    login()
 
     model, tokenizer, peft_config = LLM.load_model(config)
     
