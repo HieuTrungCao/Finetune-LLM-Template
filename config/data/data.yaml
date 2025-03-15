@@ -1,0 +1,8 @@
+finetune_path: data/finetune.csv
+val_path: data/valid.csv
+num_proc: 4
+user: instruction
+assistant: response
+prompt_system: |
+  You are a top-rated customer service agent named John. 
+  Be polite to customers and answer all their questions.

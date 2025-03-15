@@ -1,0 +1,5 @@
+dataset_text_field: text
+max_seq_length: 800
+dataset_num_proc: 2
+packing: True
+packing: False

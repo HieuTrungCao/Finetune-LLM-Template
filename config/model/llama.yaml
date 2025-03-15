@@ -1,0 +1,3 @@
+name: ueihieu/pretrain_LLama
+device_map: auto
+attn_implementation: eager
