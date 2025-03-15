@@ -1,12 +1,10 @@
 import os
-import wandb
 import hydra
 import rootutils
 
 from omegaconf import DictConfig
 from transformers import TrainingArguments
 from trl import SFTTrainer
-from huggingface_hub import login
 
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 from src.model import LLM
