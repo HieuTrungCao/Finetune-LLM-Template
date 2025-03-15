@@ -28,6 +28,10 @@ def train(config):
 
     training_arguments = SFTConfig(**training_args_dict)
     
+    print("type of training_Arg: ", type(training_args_dict))
+    print("type of trainer_config: ", type(trainer_config_dict))
+    print("Peft config: ", type(peft_config))
+    print("Stf config: ", type(training_arguments))
     trainer = SFTTrainer(
         model=model,
         train_dataset=finetune_dataset,
