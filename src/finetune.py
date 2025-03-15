@@ -3,7 +3,7 @@ import wandb
 import hydra
 import rootutils
 
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
 from transformers import TrainingArguments
 from trl import SFTTrainer, SFTConfig
 from huggingface_hub import login
@@ -15,12 +15,8 @@ from src.utils import convert_list_config_to_list
 
 def train(config):
 
-    config = convert_list_config_to_list(config)
-    run = wandb.init(
-        project=config["training_arg"]["run_name"],
-        tags=["Training"],
-        config=config
-    )
+    training_args_dict = OmegaConf.to_container(config["training_arg"], resolve=True)
+    trainer_config_dict = OmegaConf.to_container(config["trainer"], resolve=True)
 
     model, tokenizer, peft_config = LLM.load_model(config)
     
@@ -28,7 +24,7 @@ def train(config):
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
 
 
-    training_arguments = SFTConfig(**config["training_arg"])
+    training_arguments = SFTConfig(**training_args_dict)
     
     trainer = SFTTrainer(
         model=model,
@@ -37,13 +33,12 @@ def train(config):
         peft_config=peft_config,
         tokenizer=tokenizer,
         args=training_arguments,
-        **config["trainer"]
+        **trainer_config_dict
     )
 
     trainer.train()
     
     trainer.save_model(os.path.join(config["training_args"]['output_dir'], "best"))
-    wandb.finish()
     
 @hydra.main(version_base=None, config_path="../config", config_name="finetune.yaml")
 def main(config : DictConfig) -> None:
