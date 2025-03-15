@@ -20,7 +20,7 @@ def train(config):
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
 
 
-    training_arguments = TrainingArguments(**config["training_args"])
+    training_arguments = TrainingArguments(**config["training_arg"])
     
     trainer = SFTTrainer(
         model=model,
