@@ -1,4 +1,3 @@
-_convert_: all
 name: meta-llama/Llama-3.2-3B
 device_map: auto
 attn_implementation: eager

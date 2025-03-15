@@ -1,4 +1,3 @@
-_convert_: all
 finetune_path: data/finetune.csv
 val_path: data/valid.csv
 num_proc: 4
