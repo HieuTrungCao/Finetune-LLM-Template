@@ -1,12 +1,14 @@
 import os
 import wandb
 import hydra
+import rootutils
 
 from omegaconf import DictConfig
 from transformers import TrainingArguments
 from trl import SFTTrainer
 from huggingface_hub import login
 
+rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 from src.model import LLM
 from src.data import LLM_Dataset
 
@@ -15,7 +17,7 @@ def train(config):
     wb_token = "WANDB_KEY"
 
     login()
-    
+
     model, tokenizer, peft_config = LLM.load_model(config)
     
     llm_dataset = LLM_Dataset(config, tokenizer)
