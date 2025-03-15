@@ -16,7 +16,3 @@ group_by_length: True
 report_to: wandb
 run_name: "test_log"
 push_to_hub_model_id: ueihieu/test_model
-dataset_text_field: text
-max_seq_length: 800
-dataset_num_proc: 2
-packing: True
