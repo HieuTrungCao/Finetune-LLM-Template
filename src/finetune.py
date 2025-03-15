@@ -11,9 +11,12 @@ from huggingface_hub import login
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 from src.model import LLM
 from src.data import LLM_Dataset
+from src.utils import convert_list_config_to_list
 
 def train(config):
 
+    config = convert_list_config_to_list(config)
+    
     model, tokenizer, peft_config = LLM.load_model(config)
     
     llm_dataset = LLM_Dataset(config, tokenizer)
