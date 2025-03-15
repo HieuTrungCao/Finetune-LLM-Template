@@ -1,3 +1,4 @@
+_convert_: all
 r: 16
 lora_alpha: 32
 lora_dropout: 0.05
