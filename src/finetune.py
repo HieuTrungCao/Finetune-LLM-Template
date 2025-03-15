@@ -16,7 +16,12 @@ from src.utils import convert_list_config_to_list
 def train(config):
 
     config = convert_list_config_to_list(config)
-    
+    run = wandb.init(
+        project=config["training_arg"]["run_name"],
+        tags=["Training"],
+        config=config
+    )
+
     model, tokenizer, peft_config = LLM.load_model(config)
     
     llm_dataset = LLM_Dataset(config, tokenizer)
