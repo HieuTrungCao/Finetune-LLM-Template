@@ -1,4 +1,4 @@
-transformers==4.49.0
+transformers==4.46.2
 pandas==2.2.3
 PyYAML==6.0.2
 peft==0.14.0
