@@ -8,7 +8,7 @@ class TrainBLEUCallback(TrainerCallback):
     def __init__(self, trainer: Trainer):
         self.trainer: Trainer = trainer
 
-    def on_epoch_end(self, args, state, control, **kwargs):
+    def on_evaluate(self, args, state, control, **kwargs):
         print(f"\nEpoch {state.epoch}: Computing BLEU on training dataset...")
         train_results = self.trainer.predict(self.trainer.train_dataset)
         train_metrics = compute_bleu((train_results.predictions, train_results.label_ids))
