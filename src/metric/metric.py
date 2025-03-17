@@ -21,7 +21,7 @@ bleu = evaluate.load("bleu")
 
 def compute_bleu(eval_preds: EvalPrediction):
     preds, labels = eval_preds
-    preds = preds[0]
+    preds = preds[-1]
     print("preds: ", preds)
     print("labels: ", labels)
     print("preds: ", preds.size())
