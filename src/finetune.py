@@ -11,6 +11,8 @@ rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 from src.model import LLM
 from src.data import LLM_Dataset
 from src.utils import convert_list_config_to_list
+from src.callback import TrainBLEUCallback
+from src.metric import compute_bleu
 
 def train(config):
 
@@ -36,9 +38,11 @@ def train(config):
         peft_config=peft_config,
         tokenizer=tokenizer,
         args=training_arguments,
+        compute_metrics=compute_bleu
         **config["trainer"]
     )
 
+    trainer.add_callback(TrainBLEUCallback(trainer))
     trainer.train()
     
     trainer.save_model(os.path.join(config["training_arg"]['output_dir'], "best"))
