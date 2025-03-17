@@ -3,7 +3,7 @@ import evaluate
 import hydra
 
 from omegaconf import DictConfig
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, EvalPrediction
 
 @hydra.main(version_base=None, config_path="../../config", config_name="finetune.yaml")
 def get_config(conf : DictConfig) -> DictConfig:
@@ -18,11 +18,11 @@ tokenizer = AutoTokenizer.from_pretrained(config["model"]["name"])
 bleu = evaluate.load("bleu")
 
 
-def compute_bleu(eval_preds):
+def compute_bleu(eval_preds: EvalPrediction):
     print("="*50)
     print("Eval_pred: ", eval_preds)
     print("="*50)
-    preds, labels = eval_preds
+    preds, labels = eval_preds.predictions, eval_preds.label_ids
     print("Pred: ", preds)
     print("="*50)
     print("label: ", labels)
