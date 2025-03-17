@@ -41,7 +41,7 @@ def train(config):
 
     trainer.train()
     
-    trainer.save_model(os.path.join(config["training_args"]['output_dir'], "best"))
+    trainer.save_model(os.path.join(config["training_arg"]['output_dir'], "best"))
     
     if config.get("log", "log") == "wandb":
         wandb.finish()
