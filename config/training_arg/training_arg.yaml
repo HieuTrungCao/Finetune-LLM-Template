@@ -1,5 +1,5 @@
 learning_rate: 3.0e-4
-per_device_train_batch_size: 1
+per_device_train_batch_size: 2
 per_device_eval_batch_size: 1
 gradient_accumulation_steps: 8
 eval_accumulation_steps: 20
@@ -7,8 +7,8 @@ num_train_epochs: 3
 logging_steps: 1
 optim: paged_adamw_32bit
 output_dir: output
-evaluation_strategy: steps
-eval_steps: 0.2
+eval_strategy: steps
+eval_steps: 10
 warmup_steps: 10
 logging_strategy: steps
 fp16: False
@@ -16,4 +16,4 @@ bf16: False
 group_by_length: True
 report_to: wandb
 run_name: "test_log"
-push_to_hub_model_id: ueihieu/test_model
+hub_model_id: ueihieu/test_model
