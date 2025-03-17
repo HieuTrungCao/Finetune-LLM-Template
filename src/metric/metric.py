@@ -19,7 +19,14 @@ bleu = evaluate.load("bleu")
 
 
 def compute_bleu(eval_preds):
+    print("="*50)
+    print("Eval_pred: ", eval_preds)
+    print("="*50)
     preds, labels = eval_preds
+    print("Pred: ", preds)
+    print("="*50)
+    print("label: ", labels)
+    print("="*50)
     # Decode predictions and labels
     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
     # Replace -100 in labels (used for padding) with pad_token_id
