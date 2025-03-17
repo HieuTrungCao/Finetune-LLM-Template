@@ -38,7 +38,7 @@ def train(config):
         peft_config=peft_config,
         tokenizer=tokenizer,
         args=training_arguments,
-        compute_metrics=compute_bleu,
+        # compute_metrics=compute_bleu,
         **config["trainer"]
     )
 
