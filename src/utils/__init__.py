@@ -1,1 +1,1 @@
-from .utils import convert_list_config_to_list
+from .utils import convert_list_config_to_list, preprocess_logits_for_metrics
