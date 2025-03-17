@@ -21,6 +21,8 @@ bleu = evaluate.load("bleu")
 
 def compute_bleu(eval_preds: EvalPrediction):
     preds, labels = eval_preds
+    print("preds: ", preds)
+    print("labels: ", labels)
     print("preds: ", preds.size())
     print("labels: ", labels.size())
     # Convert preds to a NumPy array if it’s a list or tensor
