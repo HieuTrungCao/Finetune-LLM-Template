@@ -20,19 +20,20 @@ bleu = evaluate.load("bleu")
 
 
 def compute_bleu(eval_preds: EvalPrediction):
-    preds, labels = eval_preds.predictions, eval_preds.label_ids
-    preds, labels = eval_preds
-    # Convert preds to a NumPy array if it’s a list or tensor
-    preds = np.argmax(preds, axis=1)
-    # Decode predictions and labels
-    decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
-    # Replace -100 in labels (used for padding) with pad_token_id
-    labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
-    decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
-    # Compute BLEU score
-    results = bleu.compute(predictions=decoded_preds, references=[[label] for label in decoded_labels])
+    # preds, labels = eval_preds.predictions, eval_preds.label_ids
+    # preds, labels = eval_preds
+    # # Convert preds to a NumPy array if it’s a list or tensor
+    # preds = np.argmax(preds, axis=1)
+    # # Decode predictions and labels
+    # decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
+    # # Replace -100 in labels (used for padding) with pad_token_id
+    # labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
+    # decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
+    # # Compute BLEU score
+    # results = bleu.compute(predictions=decoded_preds, references=[[label] for label in decoded_labels])
 
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
+    # if torch.cuda.is_available():
+    #     torch.cuda.empty_cache()
 
-    return {"bleu": results["bleu"]}
+    # return {"bleu": results["bleu"]}
+    return {"bleu": 0}
