@@ -23,6 +23,12 @@ def compute_bleu(eval_preds: EvalPrediction):
     print("Eval_pred: ", eval_preds)
     print("="*50)
     preds, labels = eval_preds.predictions, eval_preds.label_ids
+    preds, labels = eval_preds
+    # Convert preds to a NumPy array if it’s a list or tensor
+    if isinstance(preds, list):
+        preds = np.array(preds)
+    elif hasattr(preds, 'numpy'):  # If it’s a PyTorch/TensorFlow tensor
+        preds = preds.numpy()
     print("Pred: ", preds)
     print("="*50)
     print("label: ", labels)
