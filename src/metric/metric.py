@@ -20,10 +20,12 @@ bleu = evaluate.load("bleu")
 
 
 def compute_bleu(eval_preds: EvalPrediction):
-    preds, labels = eval_preds.predictions, eval_preds.label_ids
     preds, labels = eval_preds
+    print("preds: ", preds.size())
+    print("labels: ", labels.size())
     # Convert preds to a NumPy array if it’s a list or tensor
     preds = np.argmax(preds, axis=1)
+    print("preds: ", preds.shape)
     # Decode predictions and labels
     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
     # Replace -100 in labels (used for padding) with pad_token_id
