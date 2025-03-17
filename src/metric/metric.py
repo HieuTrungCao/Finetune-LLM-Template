@@ -1,6 +1,7 @@
 import numpy as np
 import evaluate
 import hydra
+import torch
 
 from omegaconf import DictConfig
 from transformers import AutoTokenizer, EvalPrediction
@@ -30,4 +31,8 @@ def compute_bleu(eval_preds: EvalPrediction):
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
     # Compute BLEU score
     results = bleu.compute(predictions=decoded_preds, references=[[label] for label in decoded_labels])
+
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
     return {"bleu": results["bleu"]}
