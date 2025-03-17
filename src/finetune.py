@@ -10,7 +10,7 @@ from trl import SFTTrainer
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 from src.model import LLM
 from src.data import LLM_Dataset
-from src.utils import convert_list_config_to_list
+from src.utils import convert_list_config_to_list, preprocess_logits_for_metrics
 from src.callback import TrainBLEUCallback
 from src.metric import compute_bleu
 
@@ -38,7 +38,8 @@ def train(config):
         peft_config=peft_config,
         tokenizer=tokenizer,
         args=training_arguments,
-        # compute_metrics=compute_bleu,
+        compute_metrics=compute_bleu,
+        preprocess_logits_for_metrics=preprocess_logits_for_metrics,
         **config["trainer"]
     )
 
