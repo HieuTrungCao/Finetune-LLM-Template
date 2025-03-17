@@ -6,10 +6,13 @@ from omegaconf import DictConfig
 from transformers import AutoTokenizer
 
 @hydra.main(version_base=None, config_path="../../config", config_name="finetune.yaml")
-def get_config(config : DictConfig) -> DictConfig:
-    return config
+def get_config(conf : DictConfig) -> DictConfig:
+    global config
+    config = conf
+    # return config
 
-config = get_config()
+get_config()
+
 tokenizer = AutoTokenizer.from_pretrained(config["model"]["name"])
 
 bleu = evaluate.load("bleu")
