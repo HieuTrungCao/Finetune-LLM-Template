@@ -5,7 +5,7 @@ import hydra
 from omegaconf import DictConfig
 from transformers import AutoTokenizer
 
-@hydra.main(version_base=None, config_path="../config", config_name="finetune.yaml")
+@hydra.main(version_base=None, config_path="../../config", config_name="finetune.yaml")
 def get_config(config : DictConfig) -> DictConfig:
     return config
 
