@@ -47,7 +47,7 @@ def train(config):
     
     save_model(
         config["model"]["pretrained_model_name_or_path"],
-        os.path.join(os.path.join(config["training_args"]['output_dir'], "best")),
+        os.path.join(os.path.join(config["training_arg"]['output_dir'], "best")),
         config["training_arg"]["hub_model_id"]
         )
     if config.get("log", None) is not None:
