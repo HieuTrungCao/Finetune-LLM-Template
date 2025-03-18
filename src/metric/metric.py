@@ -14,7 +14,7 @@ def get_config(conf : DictConfig) -> DictConfig:
 
 get_config()
 
-tokenizer = AutoTokenizer.from_pretrained(config["model"]["name"])
+tokenizer = AutoTokenizer.from_pretrained(config["model"]["pretrained_model_name_or_path"])
 
 bleu = evaluate.load("bleu")
 
