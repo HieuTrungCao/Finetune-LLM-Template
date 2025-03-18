@@ -4,7 +4,6 @@ per_device_eval_batch_size: 1
 gradient_accumulation_steps: 8
 eval_accumulation_steps: 20
 num_train_epochs: 3
-logging_steps: 1
 optim: paged_adamw_32bit
 output_dir: output
 eval_strategy: epoch

@@ -17,7 +17,8 @@ from src.metric import compute_bleu
 def train(config):
 
     if config.get("log", "log") == "wandb":
-        wandb.init(project=config[""]["project_name"])
+        print("Wandb init!")
+        wandb.init(project=config["log"]["project_name"])
     
     config = convert_list_config_to_list(config)
 
