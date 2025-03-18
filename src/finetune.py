@@ -10,9 +10,7 @@ from trl import SFTTrainer
 rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 from src.model import LLM
 from src.data import LLM_Dataset
-from src.utils import convert_list_config_to_list, preprocess_logits_for_metrics
-from src.callback import TrainBLEUCallback
-from src.metric import compute_bleu
+from src.utils import convert_list_config_to_list, save_model
 
 def train(config):
 
@@ -47,6 +45,11 @@ def train(config):
     
     trainer.save_model(os.path.join(config["training_arg"]['output_dir'], "best"))
     
+    save_model(
+        config["model"]["pretrained_model_name_or_path"],
+        os.path.join(os.path.join(config["training_args"]['output_dir'], "best")),
+        config["training_arg"]["hub_model_id"]
+        )
     if config.get("log", None) is not None:
         if config["log"]["name"] == "wandb":
             wandb.finish()
