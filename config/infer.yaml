@@ -1,0 +1,6 @@
+defaults:
+- _self_
+- model: training_arg
+- data: data
+
+task_name: "Finetune"
