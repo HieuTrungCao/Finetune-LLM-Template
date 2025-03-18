@@ -16,9 +16,10 @@ from src.metric import compute_bleu
 
 def train(config):
 
-    if config.get("log", "log") == "wandb":
-        print("Wandb init!")
-        wandb.init(project=config["log"]["project_name"])
+    if config.get("log", None) is not None:
+        if config["log"]["name"] == "wandb":
+            print("Wandb init!")
+            wandb.init(project=config["log"]["project_name"])
     
     config = convert_list_config_to_list(config)
 
@@ -49,8 +50,9 @@ def train(config):
     
     trainer.save_model(os.path.join(config["training_arg"]['output_dir'], "best"))
     
-    if config.get("log", "log") == "wandb":
-        wandb.finish()
+    if config.get("log", None) is not None:
+        if config["log"]["name"] == "wandb":
+            wandb.finish()
 
 @hydra.main(version_base=None, config_path="../config", config_name="finetune.yaml")
 def main(config : DictConfig) -> None:
