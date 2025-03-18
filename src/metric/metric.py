@@ -34,6 +34,9 @@ def compute_bleu(eval_preds: EvalPrediction):
     # Replace -100 in labels (used for padding) with pad_token_id
     labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
+
+    print("Sample predictions:", decoded_preds[:3])
+    print("Sample references:", decoded_labels[:3])
     # Compute BLEU score
     results = bleu.compute(predictions=decoded_preds, references=[[label] for label in decoded_labels])
 

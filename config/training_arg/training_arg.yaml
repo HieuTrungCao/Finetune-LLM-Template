@@ -17,3 +17,4 @@ group_by_length: True
 report_to: wandb
 run_name: "test_log"
 hub_model_id: ueihieu/test_model
+push_to_hub: True
