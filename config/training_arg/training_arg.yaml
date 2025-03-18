@@ -7,10 +7,11 @@ num_train_epochs: 3
 logging_steps: 1
 optim: paged_adamw_32bit
 output_dir: output
-eval_strategy: steps
-eval_steps: 10
+eval_strategy: epoch
+# eval_steps: 10
 warmup_steps: 10
 logging_strategy: steps
+logging_steps: 10
 fp16: False
 bf16: False
 group_by_length: True
@@ -18,3 +19,7 @@ report_to: wandb
 run_name: "test_log"
 hub_model_id: ueihieu/test_model
 push_to_hub: True
+load_best_model_at_end: True
+metric_for_best_model: eval_loss
+save_strategy: "no"
+greater_is_better: False
