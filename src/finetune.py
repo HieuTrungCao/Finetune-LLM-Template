@@ -44,7 +44,7 @@ def train(config):
         **config["trainer"]
     )
 
-    trainer.add_callback(TrainBLEUCallback(trainer))
+    # trainer.add_callback(TrainBLEUCallback(trainer))
     trainer.train()
     
     trainer.save_model(os.path.join(config["training_arg"]['output_dir'], "best"))
