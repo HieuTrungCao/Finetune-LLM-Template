@@ -117,10 +117,3 @@ pip install -r requirements.txt
 ```
 
 Template contains example with Bitext-customer-support-llm-chatbot dataset.<br>
-When running `python src/finetune.py` you should see something like this:
-
-<div align="center">
-
-![](https://github.com/ashleve/lightning-hydra-template/blob/resources/terminal.png)
-
-</div>
