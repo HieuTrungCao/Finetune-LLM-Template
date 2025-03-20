@@ -12,3 +12,4 @@ bitsandbytes
 evaluate==0.4.3
 matplotlib
 seaborn
+jupyter
