@@ -7,8 +7,8 @@ num_train_epochs: 10
 optim: paged_adamw_32bit
 output_dir: output
 eval_strategy: steps
-eval_steps: 0.2
-save_steps: 0.2
+eval_steps: 0.05
+save_steps: 0.05
 warmup_steps: 10
 logging_strategy: steps
 logging_steps: 1
