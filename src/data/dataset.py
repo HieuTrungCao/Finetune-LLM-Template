@@ -21,9 +21,14 @@ class LLM_Dataset:
         return dataset
     
     def format_chat_template(self, data):
+            
+            data["user"] = self.config["data"]['prompt_content']
+            for item in self.config["data"]["user"]:
+                 data["user"] = data["user"] + "\n" + item + ": " + data[item]
+
             row_json = [
                 {"role": "system", "content": self.config["data"]["prompt_system"]},
-                {"role": "user", "content": data[self.config["data"]["user"]]},
+                {"role": "user", "content": data["user"]},
                 {"role": "assistant", "content": data[self.config["data"]["assistant"]]}
             ]
             

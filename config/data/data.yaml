@@ -1,8 +1,10 @@
-finetune_path: data/finetune.csv
-val_path: data/valid.csv
+finetune_path: data/finetune_content.csv
+val_path: data/valid_content.csv
 num_proc: 4
-user: instruction
-assistant: response
+user: ["Mô tả sản phẩm", "Chủ đề", "Vấn đề của người dùng", "Tone of voice", "Đối tượng hướng đến", "Bố cục video", "Dạng nội dung"]
+assistant: Các kịch bản từng làm cho nhãn hàng
 prompt_system: |
-  You are a top-rated customer service agent named John. 
-  Be polite to customers and answer all their questions.
+  Bạn là một chuyên gia trong việc viết nội dung quảng cáo trên tiktok.
+
+prompt_content: |
+  Tạo kịch bản quảng cáo từ những yếu tố sau:
