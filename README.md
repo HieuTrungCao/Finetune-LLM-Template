@@ -16,7 +16,7 @@
 [![contributors](https://img.shields.io/github/contributors/ashleve/lightning-hydra-template.svg)](https://github.com/ashleve/lightning-hydra-template/graphs/contributors)
 
 A clean template to kickstart your deep learning project 🚀⚡🔥<br>
-Click on [<kbd>Use this template</kbd>](https://github.com/ashleve/lightning-hydra-template/generate) to initialize new repository.
+Click on [<kbd>Use this template</kbd>](https://github.com/HieuTrungCao/Finetune-LLM-Template/generate) to initialize new repository.
 
 _Suggestions are always welcome!_
 
@@ -40,7 +40,7 @@ Collection of useful MLOps tools, configs, and code snippets. You can use this r
 **Why you might not want to use it:**
 
 ❌ Things break from time to time <br>
-Lightning and Hydra are still evolving and integrate many libraries, which means sometimes things break. For the list of currently known problems visit [this page](https://github.com/ashleve/lightning-hydra-template/labels/bug).
+Lightning and Hydra are still evolving and integrate many libraries, which means sometimes things break. For the list of currently known problems visit [this page](https://github.com/HieuTrungCao/Finetune-LLM-Template/labels/bug).
 
 ❌ Not adjusted for data engineering <br>
 Template is not really adjusted for building data pipelines that depend on each other. It's more efficient to use it for model prototyping on ready-to-use data.
@@ -114,6 +114,9 @@ conda activate myenv
 
 # install requirements
 pip install -r requirements.txt
+
+# finetuning
+python src/finetune.py
 ```
 
 Template contains example with Bitext-customer-support-llm-chatbot dataset.<br>
