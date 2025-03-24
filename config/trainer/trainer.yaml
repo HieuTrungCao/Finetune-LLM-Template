@@ -4,3 +4,4 @@ dataset_text_field: text
 max_seq_length: 512
 dataset_num_proc: 2
 packing: False
+abs: hehe

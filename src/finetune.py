@@ -28,9 +28,9 @@ def train(config):
     llm_dataset = LLM_Dataset(config, tokenizer)
     finetune_dataset, valid_dataset = llm_dataset.get_dataset()
 
-    training_arguments = hydra.utils.instantiate(config.training_arg)
+    training_arguments = hydra.utils.instantiate(config["training_arg"])
     
-    trainer = hydra.utils.instantiate(config.trainer,
+    trainer = hydra.utils.instantiate(config["trainer"],
         model=model,
         train_dataset=finetune_dataset,
         eval_dataset=valid_dataset,
