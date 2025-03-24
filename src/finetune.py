@@ -19,8 +19,6 @@ def train(config):
             print("Wandb init!")
             wandb.init(project=config["log"]["project_name"])
     
-    config = convert_list_config_to_list(config)
-
     model, tokenizer, peft_config = LLM.load_model(config)
     
     peft_config = convert_list_config_to_list(peft_config)
@@ -30,6 +28,8 @@ def train(config):
 
     training_arguments = hydra.utils.instantiate(config.training_arg)
     
+    config = convert_list_config_to_list(config)
+
     trainer = SFTTrainer(
         model=model,
         train_dataset=finetune_dataset,
