@@ -28,16 +28,15 @@ def train(config):
 
     training_arguments = hydra.utils.instantiate(config.training_arg)
     
-    kwargs = {
-        "model": model,
-        "train_dataset": finetune_dataset,
-        "eval_dataset": valid_dataset,
-        "peft_config": peft_config,
-        "tokenizer": tokenizer,
-        "args": training_arguments
-    }
-
-    trainer = hydra.utils.instantiate(config.trainer, kwargs)
+    trainer = SFTTrainer(
+        model=model,
+        train_dataset=finetune_dataset,
+        eval_dataset=valid_dataset,
+        peft_config=peft_config,
+        tokenizer=tokenizer,
+        args=training_arguments,
+        **config["trainer"]
+    )
 
     trainer.train()
     
